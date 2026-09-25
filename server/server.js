@@ -1,7 +1,6 @@
 const express = require('express');
 const dns = require('dns');
 dns.setDefaultResultOrder('ipv4first');
-dns.setServers(['8.8.8.8', '8.8.4.4']);
 const helmet = require('helmet');
 const cors = require('cors');
 const dotenv = require('dotenv');

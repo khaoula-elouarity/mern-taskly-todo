@@ -96,6 +96,7 @@ export default function Auth({ onLoginSuccess, theme, onToggleTheme }) {
       );
       onLoginSuccess(data.user);
     } catch (error) {
+      console.error(`[Auth:${mode}] request failed`, error.response?.data || error.message, error);
       toast.error(error.response?.data?.message || 'Something went wrong. Please try again.');
       shake.start({ x: [0, -10, 10, -6, 6, 0], transition: { duration: 0.45 } });
     } finally {

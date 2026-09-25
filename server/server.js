@@ -22,20 +22,8 @@ app.disable('x-powered-by');
 app.set('trust proxy', process.env.NODE_ENV === 'production' ? 1 : false);
 app.use(helmet());
 
-// CORS: reflect the request origin in development, strict allow-list in production
-const clientOrigins = (process.env.CLIENT_ORIGIN || '')
-  .split(',')
-  .map((origin) => origin.trim())
-  .filter(Boolean);
-
-app.use(
-  cors({
-    credentials: true,
-    origin: clientOrigins.length
-      ? clientOrigins
-      : (origin, callback) => callback(null, origin || true),
-  })
-);
+// CORS: allow all origins
+app.use(cors());
 
 // Request logging (development only)
 if (process.env.NODE_ENV !== 'production') {

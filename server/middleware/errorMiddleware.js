@@ -6,6 +6,17 @@ const malformedJsonError = (err, req, res, next) => {
   next(err);
 };
 
+const isDatabaseError = (err) =>
+  err.code === 'MONGO_URI_MISSING' ||
+  (err.name === 'MongooseError' && err.message?.includes('buffering timed out')) ||
+  [
+    'MongoNetworkError',
+    'MongoParseError',
+    'MongoServerSelectionError',
+    'MongoTimeoutError',
+    'MongooseServerSelectionError',
+  ].includes(err.name);
+
 // 404 handler for unmatched routes
 const notFound = (req, res, next) => {
   res.status(404);
@@ -14,8 +25,13 @@ const notFound = (req, res, next) => {
 
 // Centralized error handler
 const errorHandler = (err, req, res, _next) => {
-  let statusCode = res.statusCode !== 200 ? res.statusCode : 500;
+  let statusCode = err.statusCode || (res.statusCode !== 200 ? res.statusCode : 500);
   let message = err.message || 'Internal Server Error';
+
+  if (isDatabaseError(err)) {
+    statusCode = 503;
+    message = 'Database temporarily unavailable';
+  }
 
   // Mongoose: invalid ObjectId
   if (err.name === 'CastError' && err.kind === 'ObjectId') {

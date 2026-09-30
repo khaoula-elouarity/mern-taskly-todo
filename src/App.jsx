@@ -10,11 +10,11 @@ import TodoList from './components/TodoList';
 function Background() {
   return (
     <div aria-hidden="true" className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
-      <div className="absolute inset-0 bg-[linear-gradient(135deg,#eef1fb_0%,#f7f3ff_45%,#ecfeff_100%)] dark:bg-[linear-gradient(135deg,#06070f_0%,#0b1120_45%,#120a24_100%)]" />
-      <div className="orb -left-20 -top-24 h-80 w-80 animate-float bg-brand-500/40" />
-      <div className="orb -right-16 top-0 h-96 w-96 animate-float-slow bg-cyan-400/30" />
-      <div className="orb bottom-[-16%] left-[28%] h-[26rem] w-[26rem] animate-float bg-fuchsia-400/30 [animation-delay:-5s]" />
-      <div className="orb bottom-[8%] right-[12%] h-72 w-72 animate-float-slow bg-amber-300/30 [animation-delay:-9s]" />
+      <div className="absolute inset-0 bg-[linear-gradient(135deg,#f4f4f5_0%,#ffffff_45%,#fafafa_100%)] dark:bg-[linear-gradient(135deg,#08080a_0%,#0e0e10_45%,#0a0a0c_100%)]" />
+      <div className="orb -left-24 -top-28 h-80 w-80 animate-float bg-black/[0.10] dark:bg-white/[0.10]" />
+      <div className="orb -right-20 -top-10 h-96 w-96 animate-float-slow bg-black/[0.08] dark:bg-white/[0.08]" />
+      <div className="orb bottom-[-18%] left-[26%] h-[26rem] w-[26rem] animate-float bg-black/[0.07] dark:bg-white/[0.07] [animation-delay:-5s]" />
+      <div className="orb bottom-[6%] right-[10%] h-72 w-72 animate-float-slow bg-black/[0.06] dark:bg-white/[0.06] [animation-delay:-9s]" />
       <div className="grid-overlay" />
     </div>
   );
@@ -30,7 +30,7 @@ function SplashScreen() {
             transition={{ duration: 5, repeat: Infinity, ease: 'linear' }}
             className="absolute -inset-3 rounded-3xl border-2 border-dashed border-brand-400/40"
           />
-          <div className="grid h-16 w-16 place-items-center rounded-2xl bg-gradient-to-br from-brand-500 to-violet-600 text-white shadow-xl shadow-brand-600/40">
+          <div className="grid h-16 w-16 place-items-center rounded-2xl border border-white/15 bg-white text-black dark:border-black/15 dark:bg-black dark:text-white">
             <ListTodo size={28} />
           </div>
         </div>
@@ -110,7 +110,12 @@ export default function App() {
       padding: '12px 16px',
       maxWidth: '360px',
     },
-    success: { iconTheme: { primary: '#8b5cf6', secondary: '#ffffff' } },
+    success: {
+      iconTheme: {
+        primary: theme === 'dark' ? '#ffffff' : '#0a0a0a',
+        secondary: theme === 'dark' ? '#0a0a0a' : '#ffffff',
+      },
+    },
     error: { iconTheme: { primary: '#ef4444', secondary: '#ffffff' } },
   };
 

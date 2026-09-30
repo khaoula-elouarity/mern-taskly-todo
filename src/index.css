@@ -68,7 +68,7 @@
     @apply font-sans antialiased text-slate-800;
     min-height: 100vh;
     overflow-x: hidden;
-    background-color: #eef1fb;
+    background-color: #f4f4f5;
     transition:
       background-color 0.4s ease,
       color 0.4s ease;
@@ -76,11 +76,15 @@
 
   html.dark body {
     @apply text-slate-100;
-    background-color: #070b18;
+    background-color: #08080a;
   }
 
   ::selection {
-    background: color-mix(in srgb, var(--color-brand-500) 35%, transparent);
+    background: rgba(0, 0, 0, 0.16);
+  }
+
+  html.dark ::selection {
+    background: rgba(255, 255, 255, 0.24);
   }
 
   ::-webkit-scrollbar {
@@ -91,14 +95,20 @@
     background: transparent;
   }
   ::-webkit-scrollbar-thumb {
-    background: color-mix(in srgb, var(--color-brand-500) 30%, transparent);
+    background: rgba(0, 0, 0, 0.2);
     border-radius: 999px;
     border: 2px solid transparent;
     background-clip: content-box;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: color-mix(in srgb, var(--color-brand-500) 55%, transparent);
+    background: rgba(0, 0, 0, 0.38);
     background-clip: content-box;
+  }
+  html.dark ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.18);
+  }
+  html.dark ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.34);
   }
 }
 

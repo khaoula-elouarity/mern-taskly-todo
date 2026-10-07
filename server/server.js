@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-require('dotenv').config();
+require('dotenv').config({ path: require('path').join(__dirname, '.env') });
 
 const connectDB = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
@@ -14,7 +14,9 @@ app.use(express.json());
 app.use(cors());
 
 // اتصال بقاعدة البيانات
-connectDB();
+connectDB().catch((error) => {
+  console.error(`❌ ${error.message}`);
+});
 
 // Routes
 app.use('/api/auth', authRoutes);
